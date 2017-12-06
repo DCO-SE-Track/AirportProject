@@ -16,27 +16,18 @@ public class Airport {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @NotNull
-    private Location location;
+    private String location;
     @NotNull
     @ManyToOne
     private Airplane airplane;
 
-    public Airport(Location location, Airplane airplane) {
+    public Airport(String location) {
         this.location = location;
-        this.airplane = airplane;
     }
 
     // Empty constructor for Repository
     public Airport(){
 
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
     }
 
     public Airplane getAirplane() {
@@ -53,5 +44,13 @@ public class Airport {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

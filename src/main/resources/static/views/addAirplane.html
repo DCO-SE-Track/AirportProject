@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add airplanes</title>
+
+    <link rel="stylesheet" href="css/modals.css">
+    <!-- Import JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Import Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
+    <!-- bootstrap js -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Datatables -->
+    <Link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.3/css/select.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/select/1.2.3/js/dataTables.select.min.js"></script>
+    <script src ="js/flights.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('#airplaneForm').validator().on('submit', function (e) {
+              if (e.isDefaultPrevented()) {
+                // INVALID FORM, DO NOTHING
+              } else {
+                // Do something.
+                postForm();
+                // Prevent default form action
+                e.preventDefault();
+              }
+            });
+        });
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <row>
+        <h1>Add an airplane</h1>
+    </row>
+    <br>
+    <form class="formcenter" data-toggle="validator" role="form" id="airplaneForm">
+        <div class="row form-group">
+            <div class="col-25">
+                <div class="control-label" id="modelText"></div>
+                <label for="model">Airplane model:</label>
+            </div>
+            <div class="col-75">
+                <input type="text" class="form-control" id="model" name="modelName" placeholder="Model name" value="" data-error="Please provide a name for the airplane." required>
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <input id="submitButton" type="submit" value="Add airplane">
+        </div>
+
+    </form>
+</div>
+
+</body>
+</html>
