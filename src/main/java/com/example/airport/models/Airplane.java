@@ -1,6 +1,10 @@
 package com.example.airport.models;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 /**
  * Model for Airplane
@@ -9,6 +13,10 @@ import javax.persistence.Entity;
 @Entity
 public class Airplane {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+    @NotNull
     private Airport airport;
     private String model;
     private double currentFuel;
@@ -21,6 +29,7 @@ public class Airplane {
         this.currentFuel = MAX_FUEL;
     }
 
+    // Empty constructor for Repository
     public Airplane(){
 
     }
@@ -55,5 +64,13 @@ public class Airplane {
 
     public double getFLIGHT_COST() {
         return FLIGHT_COST;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }
