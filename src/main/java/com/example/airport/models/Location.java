@@ -5,5 +5,5 @@ package com.example.airport.models;
  * @author doliem
  */
 public enum Location {
-    AMSTERDAM, LONDON, PARIS, STOCKHOLM, BERLIN
+    AMSTERDAM, LONDON, PARIS, STOCKHOLM, BERLIN;
 }

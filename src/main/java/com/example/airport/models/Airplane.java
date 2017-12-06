@@ -17,14 +17,13 @@ public class Airplane {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @NotNull
-    private Airport airport;
     private String model;
+    @NotNull
     private double currentFuel;
     private final double MAX_FUEL = 5.0;
     private final double FLIGHT_COST = 2.0;
 
-    public Airplane(Airport airport, String model) {
-        this.airport = airport;
+    public Airplane(String model) {
         this.model = model;
         this.currentFuel = MAX_FUEL;
     }
@@ -32,14 +31,6 @@ public class Airplane {
     // Empty constructor for Repository
     public Airplane(){
 
-    }
-
-    public Airport getAirport() {
-        return airport;
-    }
-
-    public void setAirport(Airport airport) {
-        this.airport = airport;
     }
 
     public String getModel() {
