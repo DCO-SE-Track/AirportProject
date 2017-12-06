@@ -22,7 +22,6 @@ public class AirplaneController {
 
     @RequestMapping(value = "all", method = RequestMethod.GET)
     public Iterable<Airplane> getAirplanes() {
-        Airplane airplane = new Airplane("Test");
         return airplaneRepository.findAll();
     }
 

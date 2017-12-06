@@ -22,10 +22,12 @@ public class Airplane {
     private double currentFuel;
     private final double MAX_FUEL = 5.0;
     private final double FLIGHT_COST = 2.0;
+    @NotNull
     private String airport;
 
-    public Airplane(String model) {
+    public Airplane(String model, String airport) {
         this.model = model;
+        this.airport = airport;
         this.currentFuel = MAX_FUEL;
     }
 

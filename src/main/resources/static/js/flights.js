@@ -1,13 +1,3 @@
-$(document).ready(function() {
-    $('#airplaneTable').DataTable({
-        columns: [
-            {"data": "model"},
-            {"data": "airport"}
-        ]
-    });
-
-} );
-
 function getAirplanes() {
     console.log("getting data...");
 
@@ -16,9 +6,11 @@ function getAirplanes() {
         type: "get",
         success: function(airplanes) {
 
-             $('#table').DataTable().clear();
-             $('#table').DataTable().rows.add(airplanes);
-             $('#table').DataTable().columns.adjust().draw();
+            console.log("This is the Data: " + airplanes)
+
+             $('#airplaneTable').DataTable().clear();
+             $('#airplaneTable').DataTable().rows.add(airplanes);
+             $('#airplaneTable').DataTable().columns.adjust().draw();
         }
     });
 }

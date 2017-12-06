@@ -1,15 +1,19 @@
-function postForm(){
 
+function postForm(){
+    console.log("Posting new plane");
     var model = $("#model").val();
-    var airport = $("$airport").val();
+    var airport = $("#airport").val();
+    var currentFuel = 5;
 
 
     var airplane = {
         model: model,
-        airport: airport
+        airport: airport,
+        currentFuel: currentFuel
     };
 
-    var airplaneString = JSON.stringify(room);
+    var airplaneString = JSON.stringify(airplane);
+    console.log(airplane);
 
     $.ajax({
         url: "http://localhost:8080/api/airplane/add",
@@ -19,6 +23,8 @@ function postForm(){
         success: function(result) {
             // Show result
             $("#airplaneModal").modal("toggle");
+            $("#model").val("");
+            $("#airport").val("");
             // Refresh dataTable
             getAirplanes();
         }
