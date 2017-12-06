@@ -18,8 +18,6 @@ public class Airport {
     @NotNull
     private String location;
     @NotNull
-    @ManyToOne
-    private Airplane airplane;
 
     public Airport(String location) {
         this.location = location;
@@ -28,14 +26,6 @@ public class Airport {
     // Empty constructor for Repository
     public Airport(){
 
-    }
-
-    public Airplane getAirplane() {
-        return airplane;
-    }
-
-    public void setAirplane(Airplane airplane) {
-        this.airplane = airplane;
     }
 
     public long getId() {

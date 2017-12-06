@@ -20,22 +20,8 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.3/css/select.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/select/1.2.3/js/dataTables.select.min.js"></script>
+    <script src ="js/addAirplane.js"></script>
     <script src ="js/flights.js"></script>
-
-    <script>
-        $(document).ready(function(){
-            $('#airplaneForm').validator().on('submit', function (e) {
-              if (e.isDefaultPrevented()) {
-                // INVALID FORM, DO NOTHING
-              } else {
-                // Do something.
-                postForm();
-                // Prevent default form action
-                e.preventDefault();
-              }
-            });
-        });
-    </script>
 </head>
 <body>
 
@@ -52,6 +38,14 @@
             </div>
             <div class="col-75">
                 <input type="text" class="form-control" id="model" name="modelName" placeholder="Model name" value="" data-error="Please provide a name for the airplane." required>
+                <div class="help-block with-errors"></div>
+            </div>
+            <div class="col-25">
+                <div class="control-label" id="airportText"></div>
+                <label for="model">Airplane model:</label>
+            </div>
+            <div class="col-75">
+                <input type="text" class="form-control" id="airport" name="modelName" placeholder="Model name" value="" data-error="Please provide a name for the airport." required>
                 <div class="help-block with-errors"></div>
             </div>
         </div>

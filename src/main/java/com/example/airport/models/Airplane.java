@@ -22,6 +22,7 @@ public class Airplane {
     private double currentFuel;
     private final double MAX_FUEL = 5.0;
     private final double FLIGHT_COST = 2.0;
+    private String airport;
 
     public Airplane(String model) {
         this.model = model;
@@ -63,5 +64,13 @@ public class Airplane {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getAirport() {
+        return airport;
+    }
+
+    public void setAirport(String airport) {
+        this.airport = airport;
     }
 }
