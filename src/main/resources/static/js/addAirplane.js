@@ -1,10 +1,8 @@
-
 function postForm(){
     console.log("Posting new plane");
     var model = $("#model").val();
-    var airport = $("#airport").val();
+    var airport = $("#airportLocation").val();
     var currentFuel = 5;
-
 
     var airplane = {
         model: model,
@@ -24,7 +22,6 @@ function postForm(){
             // Show result
             $("#airplaneModal").modal("toggle");
             $("#model").val("");
-            $("#airport").val("");
             // Refresh dataTable
             getAirplanes();
         }

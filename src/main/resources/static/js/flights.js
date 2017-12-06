@@ -1,3 +1,5 @@
+var currentId = null;
+
 function getAirplanes() {
     console.log("getting data...");
 
@@ -33,6 +35,57 @@ function removeAirplane(row){
             getAirplanes();
         }
     });
+}
+
+function bookFlight(row){
+//    Hier iets met een location veranderen en fuel verlagen
+    var table = $("#airplaneTable").DataTable();
+    var selectedModel = $('#airplaneSelect').val();
+    var selectedLocation = $('#airportLocationSelect').val();
+
+    var dataObject = table.row(row).data();
+    console.log(dataObject);
+
+    if(selectedLocation !== null && selectedModel !== null){
+//        Hier een update method om fuel en location te veranderen
+          console.log(selectedModel + ' and ' + selectedLocation)
+
+          $.ajax({
+              url:"http://localhost:8080/api/airplane/update",
+              type:"put",
+              data: dataObject,
+              contentType: "application/json",
+              success: function(result){
+                  console.log("Updated the airplane.");
+
+                  // Close the modal
+                  $("#bookFlightModal").modal("toggle");
+                  // Get the guests again
+                  getAirplanes();
+              }
+          });
+    }
+}
+
+var airplaneList = {};
+
+function getAirplaneDropDown() {
+    console.log("getting airplanes...")
+
+    $("#airplaneSelect").empty();
+    $.ajax({
+        url:"http://localhost:8080/api/airplane/all",
+        type:"get",
+        success: function(result) {
+            console.log("These are the airplanes: " + result);
+            for(i=0;i<result.length;i++) {
+                    // add room to dictionary
+                    airplaneList[result[i].model] = result[i];
+                    $("#airplaneSelect").append('<option value=' + result[i].model + '>' + result[i].model + '</option>');
+               }
+        }
+    })
+
 }
 
 function loadModal(url, id){

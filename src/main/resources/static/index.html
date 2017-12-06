@@ -26,10 +26,18 @@
     <script>
         $(document).ready(function() {
 
+            var rowSelected = false;
+
             $("#airplaneForm").on('submit', function(e){
                 console.log("Submitted!");
                 postForm();
             });
+
+            $("#bookFlightForm").on('submit', function(e){
+                bookFlight(table.row('.selected'));
+                console.log("Submitted!");
+            });
+
 
             console.log("Wtf gast");
             $('#airplaneTable').DataTable({
@@ -47,17 +55,31 @@
         $('#airplaneTable tbody').on( 'click', 'tr', function () {
             if ( $(this).hasClass('selected') ) {
                 $(this).removeClass('selected');
+                rowSelected = false;
             }
             else {
                 table.$('tr.selected').removeClass('selected');
                 $(this).addClass('selected');
+                rowSelected = true;
             }
         } );
 
         $('#delete').click( function () {
+            if(rowSelected == true){
+                removeAirplane(table.row('.selected'));
+            }
+        } );
 
-            //table.row('.selected').remove().draw( false );
-            removeAirplane(table.row('.selected'));
+        $('#book').click( function () {
+            getAirplaneDropDown();
+        } );
+
+        $('#cancelBooking').click( function () {
+            $("#bookFlightModal").modal("toggle");
+        } );
+
+        $('#cancelAdding').click( function () {
+            $("#airplaneModal").modal("toggle");
         } );
 
 
@@ -66,12 +88,17 @@
 
 </head>
 <body>
-
     <br>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#airplaneModal">
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#airplaneModal">
         Add airplane
     </button>
-    <button type="button" class="btn btn-primary" id="delete">
+    <button type="button" class="btn btn-warning" id="book" data-toggle="modal" data-target="#bookFlightModal">
+        Book flight
+    </button>
+    <button type="button" class="btn btn-info" id="tank">
+        Refill tank
+    </button>
+    <button type="button" class="btn btn-danger" id="delete">
         Delete
     </button>
     <br>
@@ -80,7 +107,7 @@
             <tr>
                 <th>Model</th>
                 <th>Current Fuel</th>
-                <th>Airport</th>
+                <th>Current Airport</th>
             </tr>
         </thead>
         <tbody>
@@ -113,19 +140,71 @@
                                 <label for="model">Airport:</label>
                             </div>
                             <div class="col-75">
-                                <input type="text" class="form-control" id="airport" name="modelName" placeholder="Model name" value="" data-error="Please provide a name for the airport." required>
-                                <div class="help-block with-errors"></div>
+                                <select id="airportLocation" required>
+                                    <option value="Amsterdam">Amsterdam</option>
+                                    <option value="London">London</option>
+                                    <option value="Paris">Paris</option>
+                                    <option value="Stockholm">Stockholm</option>
+                                    <option value="Berlin">Berlin</option>
+                                </select>
                             </div>
                         </div>
                         <div class="row form-group">
                             <input id="submitButton" type="submit" value="Add airplane">
                         </div>
-
+                        <button type="button" class="btn btn-warning" id="cancelAdding">
+                            Cancel
+                        </button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
+    <div class="container" >
+        <div class="modal fade" id="bookFlightModal">
+            <div class="modal-dialog">
+                <div class="modal-content" id="bookFlightContainer">
+                    <row>
+                        <h1>Add an airplane</h1>
+                    </row>
+                    <br>
+                    <form class="formcenter" data-toggle="validator" role="form" id="bookFlightForm" onsubmit="return false;">
+                        <div class="row form-group">
+                            <div class="col-25">
+                                <div id="airplaneText"></div>
+                                <label for="airplaneSelect">Select airplane</label>
+                            </div>
+                            <div class="col-75">
+                                <select id="airplaneSelect" required></select>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-25">
+                                <div class="control-label" id="airportSelect"></div>
+                                <label for="model">Airport:</label>
+                            </div>
+                            <div class="col-75">
+                                <select id="airportLocationSelect" required>
+                                    <option value="Amsterdam">Amsterdam</option>
+                                    <option value="London">London</option>
+                                    <option value="Paris">Paris</option>
+                                    <option value="Stockholm">Stockholm</option>
+                                    <option value="Berlin">Berlin</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <input id="bookFlight" type="submit" value="Book flight">
+                        </div>
+
+                    </form>
+                    <button type="button" class="btn btn-warning" id="cancelBooking">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
