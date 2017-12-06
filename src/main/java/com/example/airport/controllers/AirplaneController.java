@@ -35,12 +35,11 @@ public class AirplaneController {
         airplaneRepository.delete(airplane);
     }
 
-    @RequestMapping(value = "update", method = RequestMethod.PUT)
+    @RequestMapping(value = "update/{id}", method = RequestMethod.PUT)
     public void updateGuest(@RequestBody Airplane airplane){
         if(airplane != null){
             Airplane airplaneFromTable = airplaneRepository.findOne(airplane.getId());
             if(airplaneFromTable != null){
-                airplaneFromTable.setAirport("Jemoeder");
                 airplaneRepository.save(airplane);
             }
         }

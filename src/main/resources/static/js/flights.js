@@ -1,4 +1,4 @@
-var currentId = null;
+var airplaneId = null;
 
 function getAirplanes() {
     console.log("getting data...");
@@ -48,12 +48,12 @@ function bookFlight(row){
 
     if(selectedLocation !== null && selectedModel !== null){
 //        Hier een update method om fuel en location te veranderen
-          console.log(selectedModel + ' and ' + selectedLocation)
+          console.log(dataObject.model + ' and ' + dataObject.id);
 
           $.ajax({
-              url:"http://localhost:8080/api/airplane/update",
+              url:"http://localhost:8080/api/airplane/update/" + dataObject.id,
               type:"put",
-              data: dataObject,
+              data: JSON.stringify(dataObject),
               contentType: "application/json",
               success: function(result){
                   console.log("Updated the airplane.");
