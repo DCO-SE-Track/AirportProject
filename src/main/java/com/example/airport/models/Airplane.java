@@ -25,6 +25,11 @@ public class Airplane {
     @NotNull
     private String airport;
 
+    /**
+     * Constructor
+     * @param model model name
+     * @param airport location
+     */
     public Airplane(String model, String airport) {
         this.model = model;
         this.airport = airport;
@@ -36,6 +41,9 @@ public class Airplane {
 
     }
 
+    /*
+     * Getters & Setters
+     */
     public String getModel() {
         return model;
     }

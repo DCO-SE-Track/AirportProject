@@ -58,6 +58,9 @@ public class AirportApplicationTests {
 		Assert.assertEquals(id, airplane.getId());
 	}
 
+	/**
+	 * Tests the fuel of the airplane
+	 */
 	@Test
 	public void testFuel(){
 		double fuel = 5.0;
