@@ -23,6 +23,39 @@ function getAirplanes() {
 }
 
 /*
+ * Adds the airplane
+ */
+function addAirplane(){
+    var model = $("#model").val();
+    var airport = $("#airportLocation").val();
+    var currentFuel = 5;
+
+    var airplane = {
+        model: model,
+        airport: airport,
+        currentFuel: currentFuel
+    };
+
+    var airplaneString = JSON.stringify(airplane);
+
+    $.ajax({
+        url: "http://localhost:8080/api/airplane/add",
+        type: "post",
+        data: airplaneString,
+        contentType: "application/json",
+        success: function(result) {
+            console.log("Added the airplane.");
+            // Show result
+            $("#airplaneModal").modal("toggle");
+            $("#model").val("");
+            // Refresh dataTable
+            getAirplanes();
+        }
+    });
+
+};
+
+/*
  * Refills the tank
  * @param: selected row
  */
@@ -76,7 +109,7 @@ function removeAirplane(row){
         contentType: "application/json",
         success: function(result){
             // Get the airplanes again
-            console.log("Removed row.");
+            console.log("Removed airplane.");
             rowSelected = false;
             getAirplanes();
         }
@@ -98,6 +131,7 @@ function bookFlight(row){
 
     // If currentFuel is not enough, return
     if(dataObject.currentFuel <= 1){
+        $("#bookFlightModal").modal("toggle");
         $('#errorModal').modal("toggle");
         return;
     }

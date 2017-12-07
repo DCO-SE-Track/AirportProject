@@ -21,7 +21,6 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.3/css/select.dataTables.min.css">
     <script src="https://cdn.datatables.net/select/1.2.3/js/dataTables.select.min.js"></script>
     <script src ="js/flights.js"></script>
-    <script src ="js/addAirplane.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -30,13 +29,14 @@
 
             $("#airplaneForm").on('submit', function(e){
                 console.log("Submitted!");
-                postForm();
+                addAirplane();
                 rowSelected = false;
             });
 
             $("#bookFlightForm").on('submit', function(e){
                 bookFlight(table.row('.selected'));
                 console.log("Submitted!");
+                rowSelected = false;
             });
 
 
