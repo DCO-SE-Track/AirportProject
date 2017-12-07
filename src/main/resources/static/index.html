@@ -31,6 +31,7 @@
             $("#airplaneForm").on('submit', function(e){
                 console.log("Submitted!");
                 postForm();
+                rowSelected = false;
             });
 
             $("#bookFlightForm").on('submit', function(e){
@@ -39,7 +40,6 @@
             });
 
 
-            console.log("Wtf gast");
             $('#airplaneTable').DataTable({
                 columns: [
                     {"data": "model"},
@@ -67,11 +67,31 @@
         $('#delete').click( function () {
             if(rowSelected == true){
                 removeAirplane(table.row('.selected'));
+                rowSelected = false;
+            }
+            else{
+                $('#errorModal').modal("toggle");
+            }
+        } );
+
+        $('#tank').click( function () {
+            if(rowSelected == true){
+                refillTank(table.row('.selected'));
+                rowSelected = false;
+            }
+            else{
+                $('#errorModal').modal("toggle");
             }
         } );
 
         $('#book').click( function () {
-            getAirplaneDropDown();
+            if(rowSelected == true){
+                $("#bookFlightModal").modal("toggle");
+                rowSelected = false;
+            }
+            else{
+                $('#errorModal').modal("toggle");
+            }
         } );
 
         $('#cancelBooking').click( function () {
@@ -79,7 +99,11 @@
         } );
 
         $('#cancelAdding').click( function () {
-            $("#airplaneModal").modal("toggle");
+            $("#airplaneModal").modal("hide");
+        } );
+
+        $('#errorCancel').click( function () {
+            $("#errorModal").modal("toggle");
         } );
 
 
@@ -92,7 +116,7 @@
     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#airplaneModal">
         Add airplane
     </button>
-    <button type="button" class="btn btn-warning" id="book" data-toggle="modal" data-target="#bookFlightModal">
+    <button type="button" class="btn btn-warning" id="book">
         Book flight
     </button>
     <button type="button" class="btn btn-info" id="tank">
@@ -166,23 +190,15 @@
             <div class="modal-dialog">
                 <div class="modal-content" id="bookFlightContainer">
                     <row>
-                        <h1>Add an airplane</h1>
+
                     </row>
                     <br>
                     <form class="formcenter" data-toggle="validator" role="form" id="bookFlightForm" onsubmit="return false;">
-                        <div class="row form-group">
-                            <div class="col-25">
-                                <div id="airplaneText"></div>
-                                <label for="airplaneSelect">Select airplane</label>
-                            </div>
-                            <div class="col-75">
-                                <select id="airplaneSelect" required></select>
-                            </div>
-                        </div>
+                        <h1>Book your flight here</h1>
                         <div class="row form-group">
                             <div class="col-25">
                                 <div class="control-label" id="airportSelect"></div>
-                                <label for="model">Airport:</label>
+                                <label for="model">Select destination:</label>
                             </div>
                             <div class="col-75">
                                 <select id="airportLocationSelect" required>
@@ -200,6 +216,19 @@
 
                     </form>
                     <button type="button" class="btn btn-warning" id="cancelBooking">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" >
+        <div class="modal fade" id="errorModal">
+            <div class="modal-dialog">
+                <div class="modal-content" id="errorContainer">
+                    <h1>Action not allowed.</h1>
+                    <button type="button" class="btn btn-warning" id="errorCancel">
                         Cancel
                     </button>
                 </div>

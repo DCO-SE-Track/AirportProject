@@ -2,6 +2,7 @@ package com.example.airport;
 
 import com.example.airport.models.Airplane;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,9 +19,20 @@ public class AirportApplicationTests {
 
 	private Airplane airplane;
 
+	/**
+	 * Initializes the airplane object for testing
+	 */
+	@Before
+	public void init(){
+		airplane = new Airplane();
+	}
+
+
+	/**
+	 * Tests the airport value
+	 */
 	@Test
 	public void testAirport(){
-		airplane = new Airplane();
 
 		String airport = "Test";
 		airplane.setAirport(airport);
@@ -29,9 +41,11 @@ public class AirportApplicationTests {
 		Assert.assertEquals(airport, airplane.getAirport());
 	}
 
+	/**
+	 * Tests the model value
+	 */
 	@Test
 	public void testModel(){
-		airplane = new Airplane();
 
 		String model = "Hallo?";
 		airplane.setModel(model);
@@ -42,6 +56,25 @@ public class AirportApplicationTests {
 
 		Assert.assertEquals(model, airplane.getModel());
 		Assert.assertEquals(id, airplane.getId());
+	}
+
+	@Test
+	public void testFuel(){
+		double fuel = 5.0;
+		airplane.setCurrentFuel(fuel);
+		boolean currentFuelMatches = (fuel == airplane.getCurrentFuel());
+
+		Assert.assertTrue(currentFuelMatches);
+
+		double flightCost = 2.0;
+		boolean flightCostMatches = (flightCost == airplane.getFLIGHT_COST());
+
+		Assert.assertTrue(flightCostMatches);
+
+		double maxFuel = 5.0;
+		boolean maxFuelMatches = (maxFuel == airplane.getMAX_FUEL());
+
+		Assert.assertTrue(maxFuelMatches);
 	}
 
 }
